@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  --discord-bg: #313338;
+  --discord-embed-bg: #2b2d31;
+  --discord-embed-border: #1e1f22;
+  --discord-text: #dbdee1;
+  --discord-muted: #949ba4;
+  --discord-link: #00a8fc;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #fafafa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #1e1f22; }
+::-webkit-scrollbar-thumb { background: #4e5058; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #6d6f78; }
+
+/* Discord embed preview styles */
+.discord-markup a { color: var(--discord-link); text-decoration: none; }
+.discord-markup a:hover { text-decoration: underline; }
+.discord-markup strong { font-weight: 700; }
+.discord-markup em { font-style: italic; }
+.discord-markup code { background: #1e1f22; padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.85em; }
