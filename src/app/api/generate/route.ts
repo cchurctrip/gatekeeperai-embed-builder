@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,15 +9,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Prompt required" }, { status: 400 });
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const groqApiKey = process.env.GROQ_API_KEY;
+    if (!groqApiKey) {
+      return NextResponse.json({ error: "API key not configured" }, { status: 500 });
+    }
 
-    const result = await model.generateContent({
-      contents: [
-        {
-          role: "user",
-          parts: [
-            {
-              text: `You are a Discord embed designer. Given the user's description, create a Discord embed configuration. Respond ONLY with valid JSON, no markdown code blocks.
+    const groqResponse = await fetch(GROQ_API_URL, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${groqApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          {
+            role: "system",
+            content: `You are a Discord embed designer. Given the user's description, create a Discord embed configuration. Respond ONLY with valid JSON, no markdown code blocks.
 
 The JSON must have this exact structure:
 {
@@ -36,16 +43,30 @@ The JSON must have this exact structure:
   "fields": [{"name": "string", "value": "string", "inline": boolean}]
 }
 
-Use appropriate emojis, colors, and formatting. Make it look professional and polished. For image/thumbnail URLs, leave empty unless the user specifically mentions images. Use Discord markdown formatting in description and field values. Max 25 fields.
-
-User request: ${prompt}`,
-            },
-          ],
-        },
-      ],
+Use appropriate emojis, colors, and formatting. Make it look professional and polished. For image/thumbnail URLs, leave empty unless the user specifically mentions images. Use Discord markdown formatting in description and field values. Max 25 fields.`,
+          },
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+        temperature: 0.7,
+        max_tokens: 2000,
+      }),
     });
 
-    const text = result.response.text().trim();
+    if (!groqResponse.ok) {
+      const errorData = await groqResponse.text();
+      console.error("Groq API Error:", groqResponse.status, errorData);
+      if (groqResponse.status === 429) {
+        return NextResponse.json({ error: "Rate limited. Try again in a moment." }, { status: 429 });
+      }
+      return NextResponse.json({ error: "AI generation failed" }, { status: 500 });
+    }
+
+    const groqData = await groqResponse.json();
+    const text = groqData.choices?.[0]?.message?.content?.trim() || "";
+    
     // Strip potential markdown code blocks
     const cleaned = text.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
     const embed = JSON.parse(cleaned);
