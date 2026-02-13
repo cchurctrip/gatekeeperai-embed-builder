@@ -11,7 +11,6 @@ export async function POST(req: NextRequest) {
 
     const groqApiKey = process.env.GROQ_API_KEY;
     if (!groqApiKey) {
-      console.error("GROQ_API_KEY missing. Available env keys:", Object.keys(process.env).filter(k => k.includes("GROQ") || k.includes("VERCEL") || k.includes("NEXT")).join(", "));
       return NextResponse.json({ error: "API key not configured" }, { status: 500 });
     }
 

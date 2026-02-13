@@ -259,6 +259,7 @@ export default function Home() {
                     {copied === "JSON" ? "Copied!" : "Copy"}
                   </button>
                 </div>
+                <p className="text-xs text-[#949ba4] mb-2">Paste this into your bot code. For <strong className="text-[#dbdee1]">discord.js</strong>, use <code className="text-[#EB459E]">channel.send({"{"} embeds: [json] {"}"})</code>. For <strong className="text-[#dbdee1]">discord.py</strong>, pass it to <code className="text-[#EB459E]">discord.Embed.from_dict(json)</code>.</p>
                 <pre className="bg-[#1e1f22] p-3 rounded text-xs text-[#dbdee1] overflow-x-auto max-h-64">{toJsonString(embed)}</pre>
               </div>
               <div>
@@ -268,6 +269,7 @@ export default function Home() {
                     {copied === "cURL" ? "Copied!" : "Copy"}
                   </button>
                 </div>
+                <p className="text-xs text-[#949ba4] mb-2">Run this in your terminal to send the embed directly via webhook. Replace <code className="text-[#EB459E]">YOUR_WEBHOOK_URL</code> with your Discord webhook URL (Channel Settings → Integrations → Webhooks).</p>
                 <pre className="bg-[#1e1f22] p-3 rounded text-xs text-[#dbdee1] overflow-x-auto max-h-64 whitespace-pre-wrap">{toCurlCommand(embed, webhookUrl || "YOUR_WEBHOOK_URL")}</pre>
               </div>
             </div>
