@@ -20,6 +20,7 @@ export default function HowToPage() {
         <div className="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="text-lg font-bold text-white flex items-center gap-2">
             <span className="text-xl">📨</span> Discord Embed Builder
+            <span className="text-[10px] font-normal text-[#949ba4] border border-[#3f4147] rounded px-1.5 py-0.5 ml-1">by <a href="https://www.gatekeeperai.app?utm_source=embed-builder&utm_medium=header" className="text-[#5865F2] hover:underline">GatekeeperAI</a></span>
           </Link>
           <Link href="/" className="px-4 py-2 text-sm bg-[#5865F2] text-white rounded-lg hover:bg-[#4752c4] transition-colors">
             Open Builder →
@@ -133,6 +134,13 @@ channel.send({ embeds: [embed] });`}</pre>
           <Link href="/" className="inline-block px-6 py-3 bg-[#5865F2] text-white font-medium rounded-lg hover:bg-[#4752c4] transition-colors">
             Open Embed Builder →
           </Link>
+        </div>
+
+        <div className="mt-10 rounded-xl border border-[#1e1f22] bg-[#111214] p-6">
+          <h2 className="text-lg font-bold text-white mb-2">Need More Than Embeds?</h2>
+          <p className="text-[#dbdee1] text-sm leading-relaxed">
+            This embed builder is a free tool from <a href="https://www.gatekeeperai.app?utm_source=embed-builder&utm_medium=seo-cta" className="text-[#5865F2] hover:underline">GatekeeperAI</a> — an AI-powered moderation platform for Discord, Telegram, and Slack. If you&apos;re managing a server, we handle automod, ban appeals, link scanning, and more so you don&apos;t have to do it all manually.
+          </p>
         </div>
       </article>
 

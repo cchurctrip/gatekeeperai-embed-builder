@@ -192,6 +192,7 @@ export default function Home() {
           <div>
             <h1 className="text-xl font-bold text-white flex items-center gap-2">
               <span className="text-2xl">📨</span> Discord Embed Builder
+              <span className="text-[10px] font-normal text-[#949ba4] border border-[#3f4147] rounded px-1.5 py-0.5 ml-1">by <a href="https://www.gatekeeperai.app?utm_source=embed-builder&utm_medium=header" target="_blank" rel="noopener noreferrer" className="text-[#5865F2] hover:underline">GatekeeperAI</a></span>
             </h1>
             <p className="text-xs text-[#949ba4] mt-0.5">Free visual editor with AI generation</p>
           </div>
@@ -433,8 +434,26 @@ export default function Home() {
         </div>
       </div>
 
+      {/* CTA */}
+      <div className="max-w-7xl mx-auto px-4 mt-16">
+        <div className="rounded-xl border border-[#1e1f22] bg-[#111214] p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <p className="text-sm font-medium text-white">Like this tool? We build AI-powered moderation for Discord, Telegram, and Slack.</p>
+            <p className="text-xs text-[#949ba4] mt-1">Automod, ban appeal handling, link scanning, and more — all in one dashboard.</p>
+          </div>
+          <a
+            href="https://www.gatekeeperai.app?utm_source=embed-builder&utm_medium=cta"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 px-5 py-2.5 text-sm font-medium bg-[#5865F2] text-white rounded-lg hover:bg-[#4752c4] transition-colors"
+          >
+            Check out GatekeeperAI →
+          </a>
+        </div>
+      </div>
+
       {/* Footer */}
-      <footer className="border-t border-[#1e1f22] mt-16 py-6 text-center">
+      <footer className="border-t border-[#1e1f22] mt-8 py-6 text-center">
         <a
           href="https://www.gatekeeperai.app?utm_source=embed-builder&utm_medium=footer"
           target="_blank"
